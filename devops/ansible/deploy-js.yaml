@@ -19,7 +19,7 @@
           - supervisor
         state: present
       tags: install
-    - name: Add nodejs apt repository key.
+    - name: "Add nodejs apt repository key"
       get_url:
         url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
         dest: /etc/apt/trusted.gpg.d/nodesource.gpg.asc
