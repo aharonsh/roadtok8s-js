@@ -28,11 +28,11 @@
         state: present
         update_cache: yes
     - name: Install dependencies
-    apt:
-      pkg:
-        - npm
-      state: present
-    tags: install        
+      apt:
+        pkg:
+          - npm
+        state: present
+      tags: install        
     - name: "Install nodejs"
       apt:
         update_cache: yes
