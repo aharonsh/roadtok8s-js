@@ -19,6 +19,19 @@
           - supervisor
         state: present
       tags: install
+    - name: "Add nodejs apt key"
+      apt_key:
+        url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
+        state: present
+    - name: "Add nodejs {{ nodejs_v }}.x ppa for apt repo"
+      apt_repository:
+        repo: deb https://deb.nodesource.com/node_{{ nodejs_v }}.x bionic main
+        update_cache: yes
+    - name: "Install nodejs"
+      apt:
+        update_cache: yes
+        name: nodejs
+        state: present
     - name: Update npm globally
       npm:
         global: yes
