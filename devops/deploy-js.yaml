@@ -19,27 +19,6 @@
           - supervisor
         state: present
       tags: install
----
-- name: Deploy Node.js app
-  hosts: all
-  become: yes
-  vars:
-    nodejs_v: 18
-  tasks:
-    - name: Update and upgrade system
-      apt:
-        upgrade: yes
-        update_cache: yes
-        cache_valid_time: 3600
-    - name: Install dependencies
-      apt:
-        pkg:
-          - curl
-          - rsync
-          - nginx
-          - supervisor
-        state: present
-      tags: install
     - name: Update npm globally
       npm:
         global: yes
