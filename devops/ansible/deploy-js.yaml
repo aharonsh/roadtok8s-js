@@ -17,6 +17,7 @@
           - rsync
           - nginx
           - supervisor
+          - npm
         state: present
       tags: install
     - name: Add apt repository signing key
