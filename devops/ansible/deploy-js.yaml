@@ -23,8 +23,8 @@
       get_url:
         url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
         dest: /etc/apt/trusted.gpg.d/nodesource.gpg.asc
-      mode: '0644'
-      force: true        
+        mode: '0644'
+        force: true        
     - name: "Add nodejs {{ nodejs_v }}.x ppa for apt repo"
       apt_repository:
         repo: deb https://deb.nodesource.com/node_{{ nodejs_v }}.x bionic main
