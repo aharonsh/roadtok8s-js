@@ -19,16 +19,12 @@
           - supervisor
         state: present
       tags: install
-    - name: Download the nodejs apt key
+    - name: Add nodejs apt repository key.
       get_url:
         url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-        dest: /etc/nodesource.gpg.key
-      become: true      
-    - name: "Add nodejs apt key from file"
-      apt_key:
-        file: /etc/nodesource.gpg.key
-        state: present
-      become: true  
+        dest: /etc/apt/trusted.gpg.d/nodesource.gpg.asc
+      mode: '0644'
+      force: true        
     - name: "Add nodejs {{ nodejs_v }}.x ppa for apt repo"
       apt_repository:
         repo: deb https://deb.nodesource.com/node_{{ nodejs_v }}.x bionic main
