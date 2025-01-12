@@ -19,16 +19,12 @@
           - supervisor
         state: present
       tags: install
-    - name: "Add nodejs apt repository key"
-      get_url:
-        url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-        dest: /etc/nodesource.asc
-        mode: '0644'
-        force: true
-      become: true        
+    - name: Add apt repository signing key
+      shell: "curl -s https://deb.nodesource.com/gpgkey/nodesource.gpg.key | apt-key add -"
+      become: true      
     - name: "Add nodejs {{ nodejs_v }}.x ppa for apt repo"
       apt_repository:
-        repo: deb [/etc/nodesource.asc] https://deb.nodesource.com/node_{{ nodejs_v }}.x bionic main
+        repo: deb https://deb.nodesource.com/node_{{ nodejs_v }}.x bionic main
         state: present
         update_cache: yes
     - name: "Install nodejs"
