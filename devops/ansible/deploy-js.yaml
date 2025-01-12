@@ -79,10 +79,10 @@
       args:
         creates: /etc/nginx/sites-enabled/roadtok8s-js
     - name: Remove default nginx site
-    file:
-      path: "{{ item }}"
-      state: absent
-    notify: restart nginx
+      file:
+        path: "{{ item }}"
+        state: absent
+      notify: restart nginx
     with_items:
       - /etc/nginx/sites-enabled/default
       - /etc/nginx/sites-available/default
