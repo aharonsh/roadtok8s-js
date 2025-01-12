@@ -64,12 +64,11 @@
       args:
         executable: /bin/bash
         chdir: "/opt/projects/roadtok8s/js/"
-      notify: reload supervisor
     - name: Configure Node.js with supervisor
       copy:
         src: ../../conf/supervisor.conf
         dest: /etc/supervisor/conf.d/roadtok8s-js.conf
-      notify:  reload supervisor
+      notify: restart nginx
     - name: Configure nginx
       copy:
         src: ../../conf/nginx.conf
@@ -80,13 +79,13 @@
       args:
         creates: /etc/nginx/sites-enabled/roadtok8s-js
     - name: Remove default nginx site
-      file:
-        path: "{{ item }}"
-        state: absent
-      notify: restart nginx
-      with_items:
-        - /etc/nginx/sites-enabled/default
-        - /etc/nginx/sites-available/default
+    file:
+      path: "{{ item }}"
+      state: absent
+    notify: restart nginx
+    with_items:
+      - /etc/nginx/sites-enabled/default
+      - /etc/nginx/sites-available/default
     - name: Update supervisor and start Node.js app
       command: "{{ item }}"
       with_items:
