@@ -83,9 +83,9 @@
         path: "{{ item }}"
         state: absent
       notify: restart nginx
-    with_items:
-      - /etc/nginx/sites-enabled/default
-      - /etc/nginx/sites-available/default
+      with_items:
+        - /etc/nginx/sites-enabled/default
+        - /etc/nginx/sites-available/default
     - name: Update supervisor and start Node.js app
       command: "{{ item }}"
       with_items:
