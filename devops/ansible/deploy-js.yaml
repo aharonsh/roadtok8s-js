@@ -22,12 +22,12 @@
     - name: "Add nodejs apt repository key"
       get_url:
         url: https://deb.nodesource.com/gpgkey/nodesource.gpg.key
-        dest: /etc/apt/trusted.gpg.d/nodesource.gpg.asc
+        dest: /etc/apt/trusted.gpg.d/nodesource.asc
         mode: '0644'
         force: true        
     - name: "Add nodejs {{ nodejs_v }}.x ppa for apt repo"
       apt_repository:
-        repo: deb https://deb.nodesource.com/node_{{ nodejs_v }}.x bionic main
+        repo: deb [/etc/apt/trusted.gpg.d/nodesource.asc] https://deb.nodesource.com/node_{{ nodejs_v }}.x bionic main
         update_cache: yes
     - name: "Install nodejs"
       apt:
